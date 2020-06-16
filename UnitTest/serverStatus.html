@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>serverStatus</title>
+  <script src="../assets/js/vue.js"></script>
+  <style>
+    [v-cloak]{
+      display: none !important;
+    }
+    .status span{
+     width: 25px;
+     height: 40px;
+     color: #FFF;
+     font-family: "Segoe UI";
+     font-size: 1.2rem;
+     font-weight: 400;
+     line-height: 23px;
+     text-align: center;
+     padding: 0.5rem;
+     margin-right: -4px;
+   }
+   .status span:nth-of-type(1){
+    background-color: #161616;
+  }
+  .status span:nth-of-type(2){
+    background-color: #2ecc71;
+  }
+  .status span:nth-of-type(3){
+    background-color: #e74c3c;
+  }
+</style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <section style="display: flex;">
+      <div>
+        <h2>serverOne</h2>
+        <div v-for="(item,index) in list[0].serverOne">
+          <label>{{item.name}}</label>
+          <span>{{item.status}}</span>
+          <button @click="fClick(0,index,item.status)">切換</button>
+        </div>
+      </div>
+      <div>
+        <h2>serverTwo</h2>
+        <div v-for="(item,index) in list[1].serverTwo">
+          <label>{{item.name}}</label>
+          <span>{{item.status}}</span>
+          <button @click="fClick(1,index,item.status)">切換</button> 
+        </div>
+      </div>
+    </section>
+    <section>
+      <br><br>
+      <div v-for="(item,index) in serverStatus" :key="index">
+        <div class="status">
+          <span>{{item.total}}</span>
+          <span>{{item.good}}</span>
+          <span>{{item.bad}}</span>
+        </div>
+        <p>{{item.name}}</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    vm = new Vue({
+      data: () => ({
+        testList:[
+        {serverOne:[
+          {name:"01",status:true},
+          {name:"02",status:true},
+          {name:"03",status:false},
+          {name:"04",status:true},
+          {name:"05",status:false},
+          {name:"06",status:true}],
+        }
+        ],
+        list:[
+        {serverOne:[
+          {name:"01",status:true},
+          {name:"02",status:true},
+          {name:"03",status:false},
+          {name:"04",status:true},
+          {name:"05",status:false},
+          {name:"06",status:true}],
+        },
+        {serverTwo:[
+         {name:"11",status:true},
+         {name:"12",status:true},
+         {name:"13",status:true},
+         {name:"14",status:true},
+         {name:"15",status:false},
+         {name:"16",status:true}]
+       },
+       {serverThree:[
+         {name:"21",status:true},
+         {name:"22",status:true},
+         {name:"23",status:true},
+         {name:"24",status:true},
+         {name:"25",status:true},
+         {name:"26",status:true}]
+       },
+       {serverFour:[
+         {name:"31",status:true},
+         {name:"32",status:true},
+         {name:"33",status:true},
+         {name:"34",status:true},
+         {name:"35",status:false},
+         {name:"36",status:true}]
+       }
+       ]
+     }),
+      methods:{
+        fClick(arr,index,status){
+          let changeStatus = !status
+          switch (arr) {
+            case 0:
+            Vue.set(this.list[arr].serverOne[index],`status`,changeStatus)
+            break;
+            case 1:
+            Vue.set(this.list[arr].serverTwo[index],`status`,changeStatus)
+            break;
+            default:
+            break;
+          }
+        }
+      },
+      computed:{
+        serverStatus(){
+          let result = []
+          let [list,listLength] = [null,null]
+          let [good,bad] = [0,0]
+          let obj = {name:"",total:"",good:"",bad:""}
+
+          list = this.list
+          listLength = this.list.length
+
+          for(let i = 0; i < listLength; i++){
+               let arr = Object.values(this.list[i])[0] // list 長度
+
+               arr.forEach((item)=>{
+                if(item.status === false) bad+=1
+                  if(item.status === true) good+=1
+                })
+
+                obj.name = Object.keys(list[i])[0] // list 長度
+                obj.total = good + bad
+                obj.good = good
+                obj.bad = bad
+                result.push(obj)
+
+                good = 0
+                bad = 0
+                obj = {name:"",total:"",good:"",bad:""}
+              }
+              return result
+            }
+          },
+          mounted() {
+            // console.log(this.list[0].serverOne[0].status)
+          }
+        }).$mount("#app");
+      </script>
+    </body>
+    </html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>SiteB</title>
+  <link rel="icon" href="../assets/img/icon.ico">
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/materialize.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/googleIcons.css">
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <script src="../assets/js/materialize.min.js"></script>
+  <script src="../assets/js/vue.js"></script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app" class="site siteB">
+    <ul>
+      <li v-for="(item,index) in listOne" :key="index">
+        <section class="theColorBox" :style="item.colorStyle">
+          <div>{{item.total}}</div>
+          <div>{{item.success}}</div>
+          <div>{{item.warning}}</div>
+        </section>
+        <section class="theImage">
+          <img :src="item.src" :style="item.imgStyle">
+        </section>
+        <section>
+          <ul>
+            <li>{{item.ip}}</li>
+            <li 
+            v-for="(itemTwo,indexTwo) in item.options" 
+            :key="indexTwo">{{itemTwo.name}}</li>
+          </ul>
+          <img v-if="index==6" :src="item.src">
+          <ul>
+            <li>{{item.ipTwo}}</li>
+            <li 
+            v-for="(itemTwo,indexTwo) in item.optionsTwo" 
+            :key="indexTwo" style="text-align: center">{{itemTwo.name}}</li>
+          </ul>
+        </section>
+      </li>
+    </ul>
+
+   <!--  <ul>
+      <li>
+        <section class="theColorBox">
+          <div>1</div>
+          <div>1</div>
+          <div>0</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>
+          <ul>
+            <li>192.168.41.11</li>
+            <li>P05</li>
+            <li>P06</li>
+            <li>P07</li>
+            <li>P08</li>
+          </ul>
+        </section>
+      </li>
+      <li>
+        <img src="../assets/img/arrow-right-bold.png">
+      </li>
+      <li>
+        <section class="theColorBox">
+          <div>5</div>
+          <div>5</div>
+          <div>0</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>
+          <ul>
+            <li>192.168.41.41</li>
+            <li>P13</li>
+            <li>P14</li>
+          </ul>
+        </section>
+      </li>
+      <li>
+        <img src="../assets/img/arrow-right-bold.png">
+      </li>
+      <li>
+        <section class="theColorBox">
+          <div>6</div>
+          <div>6</div>
+          <div>0</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>
+          <ul>
+            <li>192.168.41.33</li>
+            <li>X03</li>
+            <li>X12/x13</li>
+          </ul>
+        </section>
+      </li>
+      <li>
+        <img src="../assets/img/arrow.svg">
+      </li>
+      <li>
+        <section class="theColorBox">
+          <div>8</div>
+          <div>6</div>
+          <div>2</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+          <ul>
+            <li>192.168.41.61</li>
+            <li>P01</li>
+          </ul>
+        </section>
+        <section>
+           <img src="../assets/img/s1.jpg" alt="" style="width:150px">
+           <ul>
+            <li>192.168.41.62</li>
+            <li>P04</li>
+          </ul>
+        </section>
+      </li>
+    </ul> -->
+
+  </div>
+  <script>
+    new Vue({
+      data: () => ({
+        listOne: [
+          {
+            total:6,
+            success:4,
+            warning:2,
+            src:"../assets/img/s1.jpg",
+            ip:"192.168.41.11",
+            options:[
+            {name:"P05"},{name:"P06"},{name:"P07"},{name:"P08"}
+            ]
+          },
+          {src:"../assets/img/arrow-right-bold.png",colorStyle:"display:none",imgStyle:"width:48px;height:48px"
+          },
+          {
+            total:5,
+            success:5,
+            warning:0,
+            src:"../assets/img/s1.jpg",
+            ip:"192.168.41.41",
+            options:[
+            {name:"P13"},{name:"P14"}
+            ]
+          },
+          {src:"../assets/img/arrow-right-bold.png",colorStyle:"display:none",imgStyle:"width:48px;height:48px"
+          },
+          {
+            total:5,
+            success:5,
+            warning:0,
+            src:"../assets/img/s1.jpg",
+            ip:"192.168.41.33",
+            options:[
+            {name:"X03"},{name:"X12/x13"}
+            ]
+          },
+          {src:"../assets/img/arrow.svg",colorStyle:"display:none",imgStyle:"width:150px"
+          },
+          {
+            total:8,
+            success:6,
+            warning:2,
+            src:"../assets/img/s1.jpg",
+            srctwo:"../assets/img/s1.jpg",
+            ip:"192.168.41.61",
+            ipTwo:"192.168.41.62",
+            options:[{name:"P01"}],
+            optionsTwo:[{name:"P04"}]
+          },
+        ],
+      }),
+      methods: {
+
+      },
+      mounted() {
+
+      }
+    }).$mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>changeRightArrow</title>
+  <link rel="stylesheet" href="./UnitTestStyle/changeRightArrow.css">
+  <script src="../assets/js/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <section>
+      <h2>單一筆資料</h2>
+      <switch-button v-model="status" color="#F5BF21">
+       True 與 False 修改箭頭顏色<br>
+       或者每 3 秒變更箭頭顏色
+     </switch-button>
+     <div>
+      <div v-if="status">
+        <p>黑箭頭</p>
+        <img src="../assets/img/rightArrowBlock.png" alt="">
+      </div>
+      <div v-else>
+        <p>紅箭頭</p>
+        <img src="../assets/img/rightArrowRed.png" alt="">
+      </div>
+    </section>
+    <section>
+      <h2>多筆資料</h2>
+      <switch-button v-model="status" color="#F5BF21">
+        True 與 False 修改箭頭顏色<br>
+        或者每 3 秒變更箭頭顏色
+      </switch-button>
+      <div v-for="(item,index) in list" :key="index">
+        <span>{{item.name}}</span>
+        <div v-if="item.status">
+          <img src="../assets/img/rightArrowBlock.png" alt="">
+        </div>
+        <div v-else>
+          <img src="../assets/img/rightArrowRed.png" alt="">
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- Switch 實體化 -->
+  <template id="switch-button">
+    <div class="switch-button-control">
+      <div class="switch-button" :class="{ enabled: isEnabled }" @click="toggle" :style="{'--color': color}">
+        <div class="button"></div>
+      </div>
+      <div class="switch-button-label">
+        <slot></slot>
+      </div>
+    </template>
+  </div>
+  
+  <script>
+    Vue.component("switch-button", {
+      template: "#switch-button",
+      model: {
+        prop: "isEnabled",
+        event: "toggle"
+      },
+      props: {
+        isEnabled: Boolean,
+        color: {
+          type: String,
+          required: false,
+          default: "#4D4D4D"
+        }
+      },
+      methods: {
+        toggle: function() {
+          this.$emit("toggle", !this.isEnabled);
+        }
+      }
+    });
+
+    new Vue({
+      data: () => ({
+        status:false,
+        list:[
+        {name:"01",status:false},
+        {name:"02",status:false},
+        {name:"03",status:false},
+        ]
+      }),
+      methods:{
+        fSetTime(){
+          setInterval(()=>{
+            this.status = !this.status
+            this.list.forEach(e=>{
+              e.status = !e.status
+            })
+          },3000)
+        }
+      },
+      mounted() {
+        this.fSetTime()
+      }
+    }).$mount("#app");
+  </script>
+</body>
+
+</html>

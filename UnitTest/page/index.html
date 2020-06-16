@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Server status</title>
+  <link rel="icon" href="assets/img/icon.ico">
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/materialize.min.css">
+  <link rel="stylesheet" href="assets/css/googleIcons.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
+  <script src="assets/js/materialize.min.js"></script>
+  <script src="assets/js/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  <style>
+    .worring{
+      background-color:red;
+      color:#FFF;
+    }
+    .styleOne{
+      display: flex;
+      align-items: center;
+    }
+    .styleOne span{
+      margin-left: 0.5rem;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <div id="app" class="container index">
+    <section>
+      <ul>
+        <li><a href="views/case1.html">Case1</a></li>
+        <li><a href="views/case2.html">Case2</a></li>
+        <li><a href="views/siteA.html">SiteA</a></li>
+        <li><a href="views/siteB.html">SiteB</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3 class="worring">{{message}}</h3>
+      <div class="styleOne">
+        <img src="assets/img/hourglass.png" alt="">
+        <span>Up Time: {{nowTime}}</span>
+      </div>
+      <div v-for="item in list">
+        {{item.purpose}} - {{item.hostname}} - {{item.device_id}}
+      </div>
+    </section>
+    <section>
+    </section>
+  </div>
+  <script>
+    new Vue({
+      data: () => ({
+        websock:null,
+        nowTime:null,
+        list: null,
+        time: null,
+        message:""
+      }),
+      created(){
+        this.initWebSocket();
+      },
+      destroyed() {
+        this.websock.close()
+      // 離開路由後斷開 websocket 連結
+    },
+    methods:{
+      initWebSocket(){
+        const wsurl = 'ws://localhost:8888';
+        this.websock = new WebSocket(wsurl);
+        this.websock.onmessage = this.websocketonmessage
+        this.websock.onopen = this.websocketonopen;
+        this.websock.onerror = this.websocketonerror;
+        this.websock.onclose = this.websocketclose;
+        this.message = ''
+      },
+      // 連結建立之後執行 send 方法發送數據
+      websocketonopen(){
+        // let actions = {"test": 12345};
+        // let actions = "客戶初次發送信息";
+        // this.websocketsend(actions);
+      }, 
+      // 連結建立失敗重連
+      websocketonerror(){
+       this.initWebSocket();
+       this.message = '';
+     },
+      // 數據接收
+      websocketonmessage(e){
+        const redata = JSON.parse(e.data);
+        this.nowTime = redata[0].time
+        this.list = redata[0].data[0]
+      },
+      // 數據發送
+      websocketsend(data){
+        this.websock.send(data);
+      },
+      // 關閉
+      websocketclose(e){
+        console.log('斷開連結');
+        this.message = '請求失敗處理 請確認伺服器是否正常運作'
+      }
+    },
+    mounted() {
+   
+    }
+  }).$mount("#app");
+</script>
+</body>
+
+</html>

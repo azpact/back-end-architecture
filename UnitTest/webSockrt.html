@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>webSockrt</title>
+  <script src="../assets/js/vue.js"></script>
+  <style>
+    [v-cloak]{
+      display: none !important;
+    }
+    .worring{
+      text-align: center;
+      color: red;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    img{
+      width: 32px;
+      height: 32px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <section>
+      <div class="worring">
+        <pre>{{message}}</pre>
+      </div>
+      <div class="styleOne">
+        <img src="../assets/img/hourglass.png" alt="">
+        <span v-if="!message">Up Time: {{nowTime}}</span>
+        <span v-else>Up Time: None</span>
+      </div>
+      <div v-for="item in list">
+        {{item.purpose}} - {{item.hostname}} - {{item.device_id}}
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    vm = new Vue({
+      data: () => ({
+       websock:null,
+       nowTime:null,
+       list: null,
+       time: null,
+       message:""
+     }),
+      created(){
+        this.initWebSocket();
+      },
+      destroyed() {
+        this.websock.close()
+      // 離開路由後斷開 websocket 連結
+    },
+    methods:{
+      initWebSocket(){
+        const wsurl = 'ws://localhost:8888';
+        this.websock = new WebSocket(wsurl);
+        this.websock.onmessage = this.websocketonmessage
+        this.websock.onopen = this.websocketonopen;
+        this.websock.onerror = this.websocketonerror;
+        this.websock.onclose = this.websocketclose;
+        this.message = ''
+      },
+      // 連結建立之後執行 send 方法發送數據
+      websocketonopen(){
+        // let actions = {"test": 12345};
+        // let actions = "客戶初次發送信息";
+        // this.websocketsend(actions);
+      }, 
+      // 連結建立失敗重連
+      websocketonerror(){
+       this.initWebSocket();
+       this.message = '';
+     },
+      // 數據接收
+      websocketonmessage(e){
+        const redata = JSON.parse(e.data);
+        this.nowTime = redata[0].time
+        this.list = redata[0].data[0]
+        this.message = ''
+      },
+      // 數據發送
+      websocketsend(data){
+        this.websock.send(data);
+      },
+      // 關閉
+      websocketclose(e){
+        console.log('斷開連結');
+        this.message = '請求失敗處理\n請確認伺服器是否正常運作'
+      }
+    },
+    mounted() {
+
+    }
+  }).$mount("#app");
+</script>
+</body>
+
+</html>

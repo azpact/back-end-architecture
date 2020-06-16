@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Case1</title>
+  <link rel="icon" href="../assets/img/icon.ico">
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/materialize.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/googleIcons.css">
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <script src="../assets/js/materialize.min.js"></script>
+  <script src="../assets/js/vue.js"></script>
+  <script src="../assets/source/data1.js"></script>
+</head>
+
+<body>
+  <div id="app" class="case">
+    <section>
+      <button>Edit Device</button>
+    </section>
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Model</th>
+            <th>IP</th>
+            <th>State</th>
+            <th>GUI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in listOne" :key="item.id">
+            <td>{{item.device}}</td>
+            <td>{{item.model}}</td>
+            <td>{{item.ip}}</td>
+            <td>{{item.state}}</td>
+            <td><a href="#!" @click="ms()">Click</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Port</th>
+            <th>State</th>
+            <th>Last Warning</th>
+            <th>Map</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>03</td>
+            <td>0</td>
+            <td>2020/03/03</td>
+            <td><a href="#!" @click="ms()">Click</a></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>0</td>
+            <td>2020/03/03</td>
+            <td><a href="#!" @click="ms()">Click</a></td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <script>
+  new Vue({
+    data: () => ({
+      listOne: "",
+    }),
+    methods: {
+      ms() {
+        alert('Clicked')
+      },
+      // async fGetStock() {
+      // }
+      // async fPostStock() {
+      // }
+    },
+    mounted() {
+      this.listOne = data
+      $(document).ready(function() {
+        $('select').formSelect();
+      })
+    }
+  }).$mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>SiteA</title>
+  <link rel="icon" href="../assets/img/icon.ico">
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/materialize.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/googleIcons.css">
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <script src="../assets/js/materialize.min.js"></script>
+  <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app" class="site">
+	 <ul>
+		<li v-for="(item,index) in listOne">
+			<section class="theColorBox" :style="item.colorStyle">
+				<div>{{item.total}}</div>
+				<div>{{item.success}}</div>
+				<div>{{item.warning}}</div>
+			</section>
+			<section>
+				<img :src="item.src">
+			</section>
+			<section><span>{{item.name}}</span></section>
+		</li>
+	 </ul> 
+	  <!--
+    <ul>
+      <li>
+        <section class="theColorBox">
+          <div>1</div>
+          <div>1</div>
+          <div>0</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>光矩陣<br>交換器</section>
+      </li>
+      <li>
+        <img src="../assets/img/arrow-right-bold.png"></li>
+      <li>
+        <section class="theColorBox">
+          <div>5</div>
+          <div>5</div>
+          <div>0</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>光電<br>轉換設備</section>
+      </li>
+      <li><img src="../assets/img/arrow-right-bold.png"></li>
+      <li>
+        <section class="theColorBox">
+          <div>6</div>
+          <div>6</div>
+          <div>0</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>封包<br>處理設備</section>
+      </li>
+      <li><img src="../assets/img/arrow-right-bold.png"></li>
+      <li>
+        <section class="theColorBox">
+          <div>8</div>
+          <div>6</div>
+          <div>2</div>
+        </section>
+        <section>
+          <img src="../assets/img/s1.jpg" alt="">
+        </section>
+        <section>偵測<br>處理設備</section>
+      </li>
+    </ul>
+		-->
+  </div>
+  <script>
+  new Vue({
+    data: () => ({
+      listOne: [
+				{name:"光矩陣交換器",total:6,success:4,warning:2,src:"../assets/img/s1.jpg"},
+				{src:"../assets/img/arrow-right-bold.png",colorStyle:"display:none",imgStyle:"width:48px"},
+				{name:"光電交換器",total:6,success:3,warning:3,src:"../assets/img/s1.jpg"},
+				{src:"../assets/img/arrow-right-bold.png",colorStyle:"display:none"},
+				{name:"光矩陣交換器",total:6,success:1,warning:5,src:"../assets/img/s1.jpg"},
+				{src:"../assets/img/arrow-right-bold.png",colorStyle:"display:none"},
+				{name:"光矩陣交換器",total:6,success:6,warning:0,src:"../assets/img/s1.jpg"},
+			],
+    }),
+    methods: {
+
+    },
+    mounted() {
+
+    }
+  }).$mount("#app");
+  </script>
+</body>
+
+</html>
