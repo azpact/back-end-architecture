@@ -1,10 +1,11 @@
 const Koa = require('koa');
-const UseRouter = require('./routers/index.js')
-const UseMiddlewares = require('./middlewares/index.js')
+const config = require('./config/index.js');
+const UseRouter = require('./routers/index.js');
+const UseMiddlewares = require('./middlewares/index.js');
 
 const app = new Koa();
 
-UseRouter(app)
-UseMiddlewares(app)
+UseRouter(app);
+UseMiddlewares(app);
 
-app.listen(3200);
+app.listen(config.backEndURL);

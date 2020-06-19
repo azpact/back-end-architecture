@@ -6,6 +6,7 @@ const ip = require('ip');
 
 // 引入 middlewares
 const miLog = require('./mi-log')
+const miHttpError = require('./mi-http-error/index.js')
 
 module.exports = (app) => {
 	// 取得 GET 與 POST 等等資訊
@@ -23,4 +24,9 @@ module.exports = (app) => {
     	dir: 'logs',
     	serverIp: ip.address()
 	}))
+	app.use(miHttpError({ // 應用請求錯誤中間件
+		errorPageFolder: path.resolve(__dirname, '../errorPage')
+		// 代碼中，指定了 /errorPage 為默認的模板文件目錄
+	})) 
+
 }
