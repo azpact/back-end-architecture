@@ -7,5 +7,5 @@ module.exports = {
 			`${this.scheme}://${this.host}:${this.port}`
 		},
 	},
-	'mongodbURL': 'mongodb://localhost:27017/nsa'
+	'mongodbURL': 'mongodb://localhost:27017/myproject'
 }

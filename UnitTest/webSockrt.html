@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>webSockrt</title>
-  <script src="../assets/js/vue.js"></script>
+  <script src="page/assets/js/vue.js"></script>
   <style>
     [v-cloak]{
       display: none !important;
@@ -27,6 +27,9 @@
 <body>
   <div id="app" v-cloak>
     <section>
+      <button @click="websocketsend()">Send</button>
+    </section>
+    <section>
       <div class="worring">
         <pre>{{message}}</pre>
       </div>
@@ -45,6 +48,7 @@
     vm = new Vue({
       data: () => ({
        websock:null,
+       readyState:null,
        nowTime:null,
        list: null,
        time: null,
@@ -59,19 +63,19 @@
     },
     methods:{
       initWebSocket(){
-        const wsurl = 'ws://localhost:8888';
+        const wsurl = 'ws://localhost:3000';
         this.websock = new WebSocket(wsurl);
-        this.websock.onmessage = this.websocketonmessage
+        this.readyState = this.websock.readyState;
         this.websock.onopen = this.websocketonopen;
         this.websock.onerror = this.websocketonerror;
         this.websock.onclose = this.websocketclose;
+        this.websock.onmessage = this.websocketonmessage
         this.message = ''
       },
       // 連結建立之後執行 send 方法發送數據
-      websocketonopen(){
-        // let actions = {"test": 12345};
-        // let actions = "客戶初次發送信息";
-        // this.websocketsend(actions);
+      websocketonopen(e){
+        console.log("WebSocket is open now from FrontEnd.");
+        this.websock.send('FrontEnd send to BackEnd')
       }, 
       // 連結建立失敗重連
       websocketonerror(){
@@ -80,23 +84,22 @@
      },
       // 數據接收
       websocketonmessage(e){
-        const redata = JSON.parse(e.data);
-        this.nowTime = redata[0].time
-        this.list = redata[0].data[0]
-        this.message = ''
+        console.log(e.data)
+        let result = e.data
+        this.message = result
       },
       // 數據發送
-      websocketsend(data){
-        this.websock.send(data);
+      websocketsend(){
+        let data = {name:"166"}
+        let str = JSON.stringify(data)
+        this.websock.send(str)
       },
       // 關閉
       websocketclose(e){
-        console.log('斷開連結');
         this.message = '請求失敗處理\n請確認伺服器是否正常運作'
       }
     },
     mounted() {
-
     }
   }).$mount("#app");
 </script>

@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+
+$color1:#FFF; //通用色
+$color2:#111; //通用色
+$color3:#eee; // 通用色顏色
+$color4:#9e9e9e; // 通用色
+$color5:rgba(1, 1, 1, 0.8); // 通用色
+$color6:rgba(0, 0, 0, 0.2); // 通用色
+$color7:#ddd; // 通用色
+$color8:#f9f9f9;   // 通用色
+
+$background1:#FAEEF0;  // 背景色
+$assit1:#FBBFC9; // 輔助色
+$assit2:#5FB3FB; // 輔助色
+$assit3:#FD865C; // 輔助色
+$assit4:#F9784B; // 輔助色
+$assit5:#FFC1AB; // 輔助色
+$assit6:#FFDBCE; // 輔助色
+$assit7:#4370E4; // 輔助色
+$main1:#404045; // 主要色
+$warning:#EF5A5A; //警告色
+$warning2:#F1F100; // 警告色
+$warning3:#FF7272; //警告色
+$success1:#659166; //成功色
+$success2:#3ACE01; //成功色
+
+
+// $color4:#FFAAAA;
+
+// $color6:#5AA5C7;
+// $color7:#9DFFB6;
+// $color8:#9e9e9e;
+
+[v-cloak] {
+  display: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h2 {
+  display: inline-block;
+}
+
+h3 {
+  font-size: 1.5rem !important;
+  margin-left: 0.5rem;
+}
+
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-left {
+  justify-content: left;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-right {
+  justify-content: right;
+}
+
+.topAndDown-enter-active {
+  animation: goTopAndDown .3s;
+}
+.topAndDown-leave-active {
+  animation: backTopAndDown .3s;
+}
+.line-enter-active {
+  animation: goLine .3s;
+}
+.line-leave-active {
+  animation: backLine .3s;
+}
+
+.navbartwo-enter-active {
+  animation: goNavbartwo 1s;
+}
+.navbartwo-leave-active {
+  animation: backNavbartwo .3s;
+}   
+.sidebar-enter-active {
+  animation: goSidebar .5s;
+}
+.sidebar-leave-active {
+  animation: backSidebar .3s;
+}
+.sidebar-enter-active {
+  animation: goSidebar .5s;
+}
+.sidebar-leave-active {
+  animation: backSidebar .3s;
+}
+
+@keyframes goTopAndDown {
+  0% {
+    opacity: 0;
+    margin-top:-10rem;
+  }
+  100% {
+    opacity: 1;
+    margin:0rem;
+  }
+}
+@keyframes backTopAndDown {
+  0% {
+    opacity: 1;
+    margin:0rem;
+  }
+  100% {
+    opacity: 0;
+    margin-top:-10rem;
+  }
+} 
+@keyframes goLine {
+  0% {
+    top: -30px;
+  }
+  100% {
+    top:0px;
+  }
+}
+@keyframes backLine {
+  0% {
+    top: -50px;
+  }
+  100% {
+    top: -50px;
+  }
+} 
+
+@keyframes goNavbartwo {
+  0% {
+    bottom: -500px;
+  }
+  40%{
+    bottom: 120px;
+  }
+  60%{
+    bottom: 1rem;
+  }
+  80%{
+    bottom: 60px;
+  }
+  100% {
+    bottom: 1rem;
+  }
+}
+@keyframes backNavbartwo {
+  0% {
+    bottom: 1rem;
+  }
+  20%{
+    bottom: 80px;
+  }
+  100% {
+    bottom: -500px;
+  }
+}
+@keyframes goSidebar {
+  from {
+    left: -500px;
+  }
+  to {
+    left: 0px;
+  }
+}
+@keyframes backSidebar {
+  from {
+    left: 0px;
+  }
+  to {
+    left: -500px;
+  }
+}

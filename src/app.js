@@ -5,7 +5,7 @@ const UseMiddlewares = require('./middlewares/index.js');
 
 const app = new Koa();
 
-UseRouter(app);
 UseMiddlewares(app);
+UseRouter(app);
 
 app.listen(config.backEndURL);

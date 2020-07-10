@@ -1,5 +1,8 @@
+const koaBody = require('koa-body');
+const bodyParser = require('koa-bodyparser')
 const favicon = require('koa-favicon');
 const logger = require('koa-logger');
+const cors = require('koa2-cors');
 const json = require('koa-json');
 const path = require('path');
 const ip = require('ip');
@@ -16,6 +19,11 @@ module.exports = (app) => {
 	// 總是美化 json 數據
 	app.use(json())
 
+	// 方便提取 POST 資料
+	app.use(bodyParser())
+	// 可上傳文件 
+	app.use(koaBody()); 
+
 	// 關於 middlewares
 	app.use(miLog({
     	env: app.env,  // koa 提供的環境變量
@@ -28,5 +36,6 @@ module.exports = (app) => {
 		errorPageFolder: path.resolve(__dirname, '../errorPage')
 		// 代碼中，指定了 /errorPage 為默認的模板文件目錄
 	})) 
-
+	// 允許跨域
+	app.use(cors());
 }

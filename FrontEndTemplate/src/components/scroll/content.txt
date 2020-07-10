@@ -1,0 +1,37 @@
+# 首頁
+- https://chenxuan0000.github.io/component-document/index_prod.html#/component/seamless-others
+# 輪播
+ - 水平輪播(自動輪播)
+  - 水平移動方向，direction: 2/3
+  - 手動與自動，autoPlay:true
+  - 開始無縫滾動的數據量，limitMoveNum: 0, 
+  - 移動速度，step: 1
+  - 鼠標在上停止移動，hoverStop:true
+
+ - 水平輪播(手動)
+  - 水平移動方向，direction: 2/3
+  - 手動與自動，autoPlay:false
+  - 移動距離，switchSingleStep: 140
+ - 手機觸碰，openTouch: true
+
+# 所有配置
+- autoPlay: false,   (手動輪播，以下才有效果)
+direction: 2, // 0向下 1向上 2向左 3向右(移動方向
+switchSingleStep: 140,  // 移動距離
+openTouch: false, //手機觸碰
+
+- autoPlay: true (自動輪播，以下才有效果)
+step: 1, // (0.1~10)數值越大速度越快 
+limitMoveNum: 0,  // 開始無縫滾動的數據量
+hoverStop:true // 是否開啟鼠標懸停 stop
+
+- singleWidth (單步移動，自動輪播下有用)
+// 簡單說一秒內，移動水平 140 px
+waitTime: 1000,  // 單步運動停止的時間(默認1000ms)
+singleHeight: 50,  // 單步運動停止的高度(默認值0是無縫不停止的滾動) direction => 0/1
+singleWidth: 140, // 單步運動停止的寬度(默認值0是無縫不停止的滾動) direction => 2/3
+
+# vue 配置
+levelScroll.vue	水平輪播(預設在外)
+levelScrollOut.vue	水平輪播(箭頭在外)
+levelScrollIn.vue	水平輪播(箭頭在內)

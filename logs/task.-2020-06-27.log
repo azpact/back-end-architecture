@@ -1,0 +1,9 @@
+[2020-06-27T00:47:45.135] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.015s"}}
+[2020-06-27T00:49:19.797] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.003s"}}
+[2020-06-27T00:49:23.952] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.004s"}}
+[2020-06-27T00:49:24.857] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.002s"}}
+[2020-06-27T00:49:27.517] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.003s"}}
+[2020-06-27T00:49:29.297] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 1.105s"}}
+[2020-06-27T00:49:34.962] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.003s"}}
+[2020-06-27T00:51:20.865] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.003s"}}
+[2020-06-27T00:54:38.211] [INFO] cheese - {"projectName":"koa2-tutorial","serverIp":"192.168.56.1","message":{"responseTime":"響應時間為: 0.002s"}}
